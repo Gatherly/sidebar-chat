@@ -25,7 +25,7 @@ To be honest, it could use a little work... Maybe you can help?
 
 Some ideas for inspiration...
 - Make the app work well on mobile devices
-- Allow attendees to 
+- Allow attendees to share their screen
 - Allow the host to choose a chatroom color scheme when creating their chatroom
 - Creating a super-plush build process that deploys the app somewhere on the internet, 
 
