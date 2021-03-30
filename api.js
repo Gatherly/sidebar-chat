@@ -1,242 +1,14 @@
-const Pool = require("pg").Pool;
-const uuid = require("uuid").v4;
-const parse = require("pg-connection-string").parse;
 const awsChime = require("./lib/awsChime");
-
-const dotenv = require("dotenv");
-dotenv.config();
-
-const IS_DEV = process.env.ENVIRONMENT === "development";
-const POSTGRES_USER = process.env.POSTGRES_USER;
-const POSTGRES_DB = process.env.POSTGRES_DB;
-const DATABASE_URL = process.env.DATABASE_URL;
-
+const DatabaseQuery = require("./db/queries");
 class SidebarApi {
   constructor() {
-    console.log("Initializing database connection...");
-    if (IS_DEV) {
-      this.pool = new Pool({
-        user: POSTGRES_USER,
-        host: "localhost",
-        database: POSTGRES_DB,
-        password: "",
-        port: 5432,
-      });
-    } else {
-      this.pool = new Pool({
-        connectionString: DATABASE_URL,
-        ssl: {
-          rejectUnauthorized: false,
-        },
-      });
-    }
-    this._testConnection();
-
+    DatabaseQuery.testConnection();
     this.awsChime = new awsChime();
     console.log("Connecting to video chat provider... SUCCESS");
   }
 
-  _testConnection = () => {
-    this.pool.query("SELECT NOW()", (error, res) => {
-      if (error) throw error; // This will crash the app. Fail fast!
-      console.log("Database connection OK :D", res.rows);
-    });
-  };
-
-  _queryChats = (onSuccess, onError) => {
-    this.pool.query(
-      "SELECT * FROM chats ORDER BY created_at DESC",
-      (error, results) => {
-        if (error) {
-          onError(error);
-          return;
-        }
-        onSuccess(results.rows);
-      }
-    );
-  };
-
-  _queryChatById = (id, onSuccess, onError) => {
-    this.pool.query(
-      "SELECT * FROM chats WHERE id = $1",
-      [id],
-      (error, results) => {
-        if (error) {
-          onError(error);
-          return;
-        }
-        onSuccess(results.rows[0]);
-      }
-    );
-  };
-
-  _queryAttendeeById = (id, onSuccess, onError) => {
-    this.pool.query(
-      "SELECT * FROM attendees WHERE id = $1",
-      [id],
-      (error, results) => {
-        if (error) {
-          onError(error);
-          return;
-        }
-        onSuccess(results.rows[0]);
-      }
-    );
-  };
-
-  _queryAttendeesByChatId = (id, onSuccess, onError) => {
-    this.pool.query(
-      "SELECT * FROM attendees WHERE chat_id = $1",
-      [id],
-      (error, results) => {
-        if (error) {
-          onError(error);
-          return;
-        }
-        onSuccess(results.rows);
-      }
-    );
-  };
-
-  _updateAttendeeChimeAttendeeId = (
-    id,
-    chimeAttendeeId,
-    onSuccess,
-    onError
-  ) => {
-    this.pool.query(
-      "UPDATE attendees SET chime_attendee_id = $2 WHERE id = $1",
-      [id, chimeAttendeeId],
-      (error, results) => {
-        if (error) {
-          onError(error);
-          return;
-        }
-        onSuccess(true);
-      }
-    );
-  };
-
-  _updateChatChimeMeetingId = (id, chimeMeetingId, onSuccess, onError) => {
-    this.pool.query(
-      "UPDATE chats SET chime_meeting_id = $2 WHERE id = $1",
-      [id, chimeMeetingId],
-      (error, results) => {
-        if (error) {
-          onError(error);
-          return;
-        }
-        onSuccess(true);
-      }
-    );
-  };
-
-  _updateChatHostingAttendeeId = (
-    id,
-    hostingAttendeeId,
-    onSuccess,
-    onError
-  ) => {
-    this.pool.query(
-      "UPDATE chats SET hosting_attendee_id = $2, updated_at = $3 WHERE id = $1",
-      [id, hostingAttendeeId, new Date()],
-      (error, results) => {
-        if (error) {
-          onError(error);
-          return;
-        }
-        onSuccess(true);
-      }
-    );
-  };
-
-  _newChat = (onSuccess, onError) => {
-    const chatId = uuid();
-    this.pool.query(
-      `INSERT INTO chats (
-        id,
-        created_at,
-        updated_at
-      ) VALUES ($1, $2, $2)`,
-      [chatId, new Date()],
-      (error, results) => {
-        if (error) {
-          onError(error);
-          return;
-        }
-        onSuccess(chatId);
-      }
-    );
-  };
-
-  _newAttendee = (chatId, fullName, pronouns, onSuccess, onError) => {
-    if (!fullName) {
-      const error = new Error("Full name is required.");
-      onError(error);
-      return;
-    }
-    const attendeeId = uuid();
-    this.pool.query(
-      `INSERT INTO attendees (
-            id,
-            chat_id,
-            full_name,
-            pronouns,
-            created_at,
-            updated_at
-          ) VALUES ($1, $2, $3, $4, $5, $5)`,
-      [attendeeId, chatId, fullName, pronouns, new Date()],
-      (error, results) => {
-        if (error) {
-          onError(error);
-          return;
-        }
-        onSuccess(attendeeId);
-      }
-    );
-  };
-
-  _deleteChat = (id, onSuccess, onError) => {
-    this.pool.query(
-      "DELETE FROM attendees WHERE chat_id = $1",
-      [id],
-      (error, results) => {
-        if (error) {
-          onError(error);
-          return;
-        }
-
-        this.pool.query(
-          "DELETE FROM chats WHERE id = $1",
-          [id],
-          (error, results) => {
-            if (error) {
-              onError(error);
-              return;
-            }
-            onSuccess(true);
-          }
-        );
-      }
-    );
-  };
-
-  _deleteAttendee = (id, onSuccess, onError) => {
-    this.pool.query(
-      "DELETE FROM attendees WHERE id = $1",
-      [id],
-      (error, results) => {
-        if (error) {
-          onError(error);
-          return;
-        }
-        onSuccess(true);
-      }
-    );
-  };
-
   getChats = (request, response) => {
-    this._queryChats(
+    DatabaseQuery.queryChats(
       (chats) => {
         const data = {
           chats,
@@ -251,15 +23,15 @@ class SidebarApi {
 
   createChat = async (request, response) => {
     console.log("createChat::INIT", JSON.stringify(request.body));
-    this._newChat(
+    DatabaseQuery.newChat(
       (chatId) => {
         const { fullName, pronouns } = request.body;
-        this._newAttendee(
+        DatabaseQuery.newAttendee(
           chatId,
           fullName,
           pronouns,
           (attendeeId) => {
-            this._updateChatHostingAttendeeId(
+            DatabaseQuery.updateChatHostingAttendeeId(
               chatId,
               attendeeId,
               () => {
@@ -294,14 +66,14 @@ class SidebarApi {
     console.log("joinChat::INIT", JSON.stringify(request.params));
     const { chatId, attendeeId } = request.params;
 
-    this._queryChatById(
+    DatabaseQuery.queryChatById(
       chatId,
       (chat) => {
         if (!chat) {
           response.status(404).send("Chat not found");
           return;
         }
-        this._queryAttendeeById(
+        DatabaseQuery.queryAttendeeById(
           attendeeId,
           (attendee) => {
             if (!attendee || attendee.chat_id !== chatId) {
@@ -336,7 +108,7 @@ class SidebarApi {
     const { chatId } = request.params;
     const { fullName, pronouns = "They/them" } = request.body;
 
-    this._queryChatById(
+    DatabaseQuery.queryChatById(
       chatId,
       (chat) => {
         if (!chat || !chat.id) {
@@ -347,12 +119,12 @@ class SidebarApi {
           );
         }
 
-        this._newAttendee(
+        DatabaseQuery.newAttendee(
           chat.id,
           fullName,
           pronouns,
           (attendeeId) => {
-            this._queryAttendeeById(
+            DatabaseQuery.queryAttendeeById(
               attendeeId,
               (attendee) => {
                 console.log("Joining chat as new attendee...");
@@ -399,7 +171,7 @@ class SidebarApi {
       return;
     }
 
-    this._queryChatById(
+    DatabaseQuery.queryChatById(
       chatId,
       (chat) => {
         if (!chat) {
@@ -435,7 +207,7 @@ class SidebarApi {
       return;
     }
 
-    this._deleteChat(
+    DatabaseQuery.deleteChat(
       chatId,
       () => {
         console.log(`Chat ${chatId} deleted by hosting attendee.`);
@@ -447,7 +219,7 @@ class SidebarApi {
   };
 
   _handleDeleteAttendee = (chatId, attendeeId, chimeMeetingId, response) => {
-    this._queryAttendeesByChatId(
+    DatabaseQuery.queryAttendeesByChatId(
       chatId,
       async (attendees) => {
         const attendee = attendees.some(
@@ -476,7 +248,7 @@ class SidebarApi {
           return;
         }
 
-        this._deleteAttendee(
+        DatabaseQuery.deleteAttendee(
           attendeeId,
           async () => {
             console.log(
@@ -510,7 +282,7 @@ class SidebarApi {
     );
     const chimeMeetingId = meetingResponse.Meeting.MeetingId;
 
-    this._updateChatChimeMeetingId(
+    DatabaseQuery.updateChatChimeMeetingId(
       chat.id,
       chimeMeetingId,
       async () => {
@@ -520,12 +292,11 @@ class SidebarApi {
           chimeAttendeeId,
           attendeeId
         );
-        console.log("---->", attendeeId, chimeAttendeeId, attendeeResponse);
-        this._updateAttendeeChimeAttendeeId(
+        DatabaseQuery.updateAttendeeChimeAttendeeId(
           attendeeId,
           attendeeResponse.Attendee.AttendeeId,
           () => {
-            this._queryAttendeesByChatId(
+            DatabaseQuery.queryAttendeesByChatId(
               chat.id,
               (attendees) => {
                 const data = {
