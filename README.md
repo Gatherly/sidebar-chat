@@ -21,7 +21,7 @@ To be honest, it could use a little work... Maybe you can help?
 ## Directions
 1. **Fork this repo & run it locally** _using the instructions below. (If you are having trouble, feel free to reach out to alicia@gatherly.io or your point of contact.)_
 2. **Whip it into shape**. _Find the bugs and issues in the codebase, and fix them! You can use the checklist above to learn what a working app looks like. Keep a clean commit history so that when we read though your repo, we can easily understand the problems you identified, and the solutions you are offering._ 
-3. **Kick it up a notch** _by adding one (1) additional feature that you think will take this app to the next level. What you choose to add is up to you, but you should pick something that can be accomplished within the allotted time (3-5 hours for the entire challenge), will significantly improve user (or possibly developer) experience, and will show off your unique skillset. Please just pick one feature to add.
+3. **Kick it up a notch** _by adding **one** (1) additional feature that you think will take this app to the next level. What you choose to add is up to you, but you should pick something that can be accomplished within the allotted time (3-5 hours for the entire challenge), will significantly improve user (or possibly developer) experience, and will show off your unique skillset._
 
 Some ideas for inspiration...
 - Make the app work well on mobile devices
