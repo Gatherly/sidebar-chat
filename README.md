@@ -7,11 +7,28 @@ But just for fun, what if we wanted to have a sister app that delivers a simpler
 
 To be honest, it could use a little work... Maybe you can help?
 
+**A working version of this app will:**
+
+- [ ] Allow anyone to create a virtual video chat room
+- [ ] Allow up to 3 other people to join their video conversation via a link
+- [ ] Allow users to and mute/unmute themselves
+- [ ] Allow users to turn their camera on & off
+- [ ] Display users' names and pronouns whether their video is on or off
+- [ ] Allow the host to end the conversation
+- [ ] Comply with basic accessibility standards
+
 
 ## Directions
 1. **Fork this repo & run it locally** _using the instructions below. (If you are having trouble, feel free to reach out to alicia@gatherly.io or your point of contact.)_
-2. **Whip it into shape**. _Find the bugs and issues in the codebase, and fix them! Keep a clean commit history so that when we read though your repo, we can easily understand the problems you identified, and the solutions you are offering._ 
-3. **Kick it up a notch** _by adding one (1) more feature that you think will take this app to the next level. What you choose to add is up to you, but you should pick something that can be accomplished within the time limit (this whole challenge should take around 4 hours total), significantly improves user (or possibly developer) experience, and shows off your unique skillset. Some ideas for inspiration include, making the app work on mobile devices, adding screenshare functionality, allowing the host to select the chat's color scheme or creating a super plus build process that deploys the app somewhere on the internet, but feel free to branch out. The choice is up to you, as long as it delivers value._ 
+2. **Whip it into shape**. _Find the bugs and issues in the codebase, and fix them! You can use the checklist above to learn what a working app looks like. Keep a clean commit history so that when we read though your repo, we can easily understand the problems you identified, and the solutions you are offering._ 
+3. **Kick it up a notch** _by adding one (1) additional feature that you think will take this app to the next level. What you choose to add is up to you, but you should pick something that can be accomplished within the allotted time (3-5 hours for the entire challenge), will significantly improve user (or possibly developer) experience, and will show off your unique skillset. Please just pick one feature to add.
+
+Some ideas for inspiration...
+- Make the app work well on mobile devices
+- Allow attendees to 
+- Allow the host to choose a chatroom color scheme when creating their chatroom
+- Creating a super-plush build process that deploys the app somewhere on the internet, 
+
 
 ### Local Development
 #### Server
