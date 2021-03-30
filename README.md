@@ -22,7 +22,7 @@ To be honest, it could use a little work... Maybe you can help?
 3. **Whip it into shape**. _Using the basic functionality checklist above, as well as your general knowledge of coding best practices and app development, identify and fix as many problems as you can._ 
 4. **Invite your interviewers, as listed in the prompt email.**
 
-## Additional Directions for Senior Engineers
+### Additional Directions for Senior Engineers
 _Kick it up a notch by adding **one** (1) additional feature that you think will take this app to the next level. What you choose to add is up to you, but you should pick something that can be accomplished within the allotted time (3-5 hours for the entire challenge), will significantly improve user (or possibly developer) experience, and will show off your unique skillset._
 
 Some ideas for inspiration...
@@ -48,8 +48,7 @@ REACT_APP_HOST=http://localhost:3030
 ```
 
 #### Database
-This project uses a PostgreSQL database locally, and the Heroku Postgres addon in Production.
-Generate a clean database locally with `yarn resetdb`.
+This project uses SQLite3 database for ease of local development.
 
 #### Server
 ```
