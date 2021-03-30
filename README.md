@@ -38,9 +38,6 @@ Some ideas for inspiration...
 **.env**
 ```
 ENVIRONMENT=development
-POSTGRES_USER=dev
-POSTGRES_DB=sidebar
-DATABASE_URL=localhost
 AWS_ACCESS_KEY=<your_aws_key>
 AWS_SECRET_KEY=<your_aws_secret_key>
 PORT=3030
@@ -56,7 +53,8 @@ Generate a clean database locally with `yarn resetdb`.
 
 #### Server
 ```
-yarn && yarn start
+npm install
+npm run start
 ```
 Server will be running on localhost:3030.
 
@@ -64,8 +62,8 @@ Server will be running on localhost:3030.
 ```
 cd side-bar-web
 source .env.development
-yarn
-yarn start 
+npm install
+npm run start
 ```
 
 Navigate to http://localhost:3000/ to view the app.
