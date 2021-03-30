@@ -106,3 +106,8 @@ dist
 
 # Apple Stuff
 .DS_Store
+
+#Env
+.env
+.env.development
+.env.production
