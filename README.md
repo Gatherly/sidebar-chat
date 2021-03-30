@@ -29,7 +29,6 @@ Generate a clean database locally with `yarn resetdb`.
 cd side-bar-web
 source .env.development
 yarn
-npm rebuild node-sass
 yarn start 
 ```
 
