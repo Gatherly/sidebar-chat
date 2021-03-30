@@ -35,6 +35,7 @@ Some ideas for inspiration...
 ### Local Development
 
 #### Environment Variables
+Note: the configuration of environment variables assumes a UNIX Operating system. If you are using Windows, you will need to employ [cross-env](https://www.npmjs.com/package/cross-env) or another solution for making environment variables accessible to the apps.
 **.env**
 ```
 ENVIRONMENT=development
