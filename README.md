@@ -7,6 +7,11 @@ But just for fun, what if we wanted to have a sister app that delivers a simpler
 
 To be honest, it could use a little work... Maybe you can help?
 
+## Directions
+1. **Click the "Use this Template"** to generate a new PRIVATE repo from this one. 
+2. **Run it locally** _using the instructions below. (If you are having trouble, feel free to reach out to alicia@gatherly.io or your point of contact.)_
+3. **Whip it into shape**. _Using the basic functionality checklist above, as well as your general knowledge of coding best practices and app development, identify and fix as many problems as you can._ 
+
 **A successful video chat app will:**
 - [ ] Allow anyone to create a virtual video chat room
 - [ ] Allow up to 3 other people to join their video conversation via a link
@@ -15,11 +20,6 @@ To be honest, it could use a little work... Maybe you can help?
 - [ ] Display users' names and pronouns whether their video is on or off
 - [ ] Allow the host to end the conversation
 - [ ] Comply with basic accessibility standards
-
-## Directions
-1. **Click the "Use this Template"** to generate a new PRIVATE repo from this one. 
-2. **Run it locally** _using the instructions below. (If you are having trouble, feel free to reach out to alicia@gatherly.io or your point of contact.)_
-3. **Whip it into shape**. _Using the basic functionality checklist above, as well as your general knowledge of coding best practices and app development, identify and fix as many problems as you can._ 
 4. **Invite your interviewers, as listed in the prompt email.**
 
 ### Additional Directions for Senior Engineers
