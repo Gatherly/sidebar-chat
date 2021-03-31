@@ -10,9 +10,11 @@ To be honest, it could use a little work... Maybe you can help?
 ## Directions
 1. **Click the "Use this Template"** to generate a new PRIVATE repo from this one. 
 2. **Run it locally** _using the instructions below. (If you are having trouble, feel free to reach out to alicia@gatherly.io or your point of contact.)_
-3. **Whip it into shape**. _Using the basic functionality checklist above, as well as your general knowledge of coding best practices and app development, identify and fix as many problems as you can._ 
+3. **Whip it into shape**. _Using the basic functionality checklist below, as well as your general knowledge of coding best practices and app development, identify and fix as many problems as you can._ 
+4. **Invite your interviewers, as listed in the prompt email.**
 
-**A successful video chat app will:**
+
+#### A successful video chat app will:
 - [ ] Allow anyone to create a virtual video chat room
 - [ ] Allow up to 3 other people to join their video conversation via a link
 - [ ] Allow users to and mute/unmute themselves
@@ -20,9 +22,8 @@ To be honest, it could use a little work... Maybe you can help?
 - [ ] Display users' names and pronouns whether their video is on or off
 - [ ] Allow the host to end the conversation
 - [ ] Comply with basic accessibility standards
-4. **Invite your interviewers, as listed in the prompt email.**
 
-### Additional Directions for Senior Engineers
+#### Additional Directions for Senior Engineers
 _Kick it up a notch by adding **one** (1) additional feature that you think will take this app to the next level. What you choose to add is up to you, but you should pick something that can be accomplished within the allotted time (3-5 hours for the entire challenge), will significantly improve user (or possibly developer) experience, and will show off your unique skillset._
 
 Some ideas for inspiration...
