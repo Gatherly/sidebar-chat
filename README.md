@@ -1,4 +1,4 @@
-##### _SOLUTION to Engineering Challenge_
+##### _Engineering Challenge_
 # Sidebar  📺 💬
 
 Our main app is an immersive virtual space where users can sporadically form huddles, hear broadcasts, and get the "public gathering" feel of an in-person event from the comfort of their personal computer. 
