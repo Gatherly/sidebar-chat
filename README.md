@@ -17,6 +17,7 @@ To be honest, it could use a little work... Maybe you can help?
 #### A successful video chat app will:
 - [ ] Allow anyone to create a virtual video chat room
 - [ ] Allow up to 3 other people to join their video conversation via a link
+- [ ] Show video tiles for all present attendees
 - [ ] Allow users to and mute/unmute themselves
 - [ ] Allow users to turn their camera on & off
 - [ ] Display users' names and pronouns whether their video is on or off
